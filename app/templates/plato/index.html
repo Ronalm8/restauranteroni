@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Plato</title>
+</head>
+<body>
+
+    <h1>RESTAURANTE RONI BURGER</h1>
+    <h1>Items Carrito {{ t }} </h1> 
+    <a href="{{ url_for('carritos.listar') }}">Ir a pedido</a>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>descripcion</th>
+            <th>acciones</th>
+        </tr>
+        {% for plato in data %}
+            <tr>
+                <td>{{ plato.id }}</td>
+                <td>{{ plato.nombre }}</td>
+                <td>{{ plato.precio }}</td>
+                <td>{{ plato.descripcion }}</td>
+                <td>
+                    <form action="{{ url_for('carritos.agregar_al_carrito', id = plato.id) }}" method="post">
+                        <input type="number" name="cantidad" value="1" min="1">
+                        <button type="submit">Agregar al carrito</button>
+                    </form>
+                    <!-- Agrega aquí el enlace para eliminar -->
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

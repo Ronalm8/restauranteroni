@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Autor</title>
+</head>
+<body>
+    <h1>Carrito</h1>
+    <table>
+        <tr>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Acciones</th>
+        </tr>
+        {% for item in items %}
+        
+            <tr>
+                <td>{{ item['plato'].nombre }}</td>
+                <td>{{ item['plato'].precio }}</td>
+                <td>{{ item['cantidad'] }}</td>
+                <td>
+
+                <a href="{{ url_for('carritos.eliminar_del_carrito', id=item['plato'].id) }}">Eliminar</a>
+                      
+                    <!-- Agrega aquí el enlace para eliminar -->
+                </td>
+            </tr>
+        {% endfor %}        
+    </table>
+    <a href="{{ url_for('carritos.realizar_compra') }}">Generar factura</a>
+</body>
+</html>
